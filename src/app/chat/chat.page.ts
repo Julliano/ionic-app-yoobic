@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonContent } from '@ionic/angular';
+import { timeout } from 'q';
 
 @Component({
   selector: 'app-chat',
@@ -26,6 +28,7 @@ export class ChatPage implements OnInit {
 
   currentUser = 'Simon';
   newMsg = '';
+  @ViewChild(IonContent, {static: false}) content: IonContent
 
   constructor() { }
 
@@ -40,6 +43,10 @@ export class ChatPage implements OnInit {
     });
 
     this.newMsg = '';
+
+    setTimeout(() => {
+      this.content.scrollToBottom(200);
+    })
   }
 
 }
