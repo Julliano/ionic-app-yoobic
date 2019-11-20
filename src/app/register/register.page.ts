@@ -43,6 +43,10 @@ export class RegisterPage implements OnInit {
 
     }
 
+    login() {
+        this.router.navigate(['/login']);
+    }
+
     async showAlert(header: string, message: string) {
         const alert = await this.alert.create({
             header,

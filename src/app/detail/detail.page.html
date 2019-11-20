@@ -1,9 +1,31 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Detail</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>{{data.author}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-img src="{{data.download_url}}"></ion-img>
+    <ion-card-content>
+      <div>
+        API id: {{data.id}}
+      </div>
+      <div>
+        Image height: {{data.height}}
+      </div>
+      <div>
+        Image width: {{data.width}}
+      </div>
+      <div>
+        Url to access: <a href="{{data.url}}" target="_blank">{{data.url}}</a>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

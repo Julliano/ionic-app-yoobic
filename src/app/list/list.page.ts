@@ -1,39 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router, NavigationExtras } from '@angular/router'
+
+export interface Items {
+    author: string;
+    url: string;
+    download_url: string;
+}
 
 @Component({
-  selector: 'app-list',
-  templateUrl: 'list.page.html',
-  styleUrls: ['list.page.scss']
+    selector: 'app-list',
+    templateUrl: 'list.page.html',
+    styleUrls: ['list.page.scss']
 })
-export class ListPage implements OnInit {
-  private selectedItem: any;
-  private icons = [
-    'flask',
-    'wifi',
-    'beer',
-    'football',
-    'basketball',
-    'paper-plane',
-    'american-football',
-    'boat',
-    'bluetooth',
-    'build'
-  ];
-  public items: Array<{ title: string; note: string; icon: string }> = [];
-  constructor() {
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
-  }
 
-  ngOnInit() {
-  }
-  // add back when alpha.4 is out
-  // navigate(item) {
-  //   this.router.navigate(['/list', JSON.stringify(item)]);
-  // }
+@Injectable()
+export class ListPage implements OnInit {
+    items: Items;
+    private API_URL = 'https://picsum.photos/v2/list';
+    private selectedItem: any;
+    public jokes: Items;
+
+    constructor(
+        private http: HttpClient,
+        public router: Router) { }
+
+    ngOnInit() {
+        this.getInitialData();
+    }
+
+    async getInitialData() {
+        this.http.get(this.API_URL, {})
+            .subscribe((data: Items) => {
+                this.jokes = data;
+            });
+    }
+    // add back when alpha.4 is out
+    navigate(itemSelected) {
+        let navigationExtras: NavigationExtras = {
+            state: {
+              item: itemSelected
+            }
+        };
+        this.router.navigate(['/detail'], navigationExtras);
+    }
+
 }
