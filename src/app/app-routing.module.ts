@@ -20,12 +20,12 @@ const routes: Routes = [
         loadChildren: () => import('./list/list.module').then( m => m.ListPageModule)
     },
     {
-        path: 'feed',
-        loadChildren: () => import('./feed/feed.module').then(m => m.FeedPageModule)
-    },
-    {
         path: 'detail',
         loadChildren: () => import('./detail/detail.module').then(m => m.DetailPageModule)
+    },
+    {
+        path: 'chat',
+        loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule)
     }
 ];
 
